@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.post('/api/json', (req, res) => {
-  message = "Your data ";
+  message = "Your data : Post Method 1 2 3 4";
   for (let key in req.body) {
     message += `${key}: ${req.body[key]}`
   }
@@ -23,7 +23,7 @@ app.post('/api/json', (req, res) => {
 });
 
 app.get('/api/json', (req, res) => {
-  message = "Your data : ทดสอบระบบ 1 2 3 4";
+  message = "Your data : Get method 1 2 3 4";
   for (let key in req.query) {
     message += `${key}: ${req.query[key]}`
   }

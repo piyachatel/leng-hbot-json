@@ -23,8 +23,7 @@ app.post('/api/json', (req, res) => {
 });
 
 app.get('/api/json', (req, res) => {
-console.log('hello world');
-  message = "Your data ";
+  message = "Your data : ทดสอบระบบ 1 2 3 4";
   for (let key in req.query) {
     message += `${key}: ${req.query[key]}`
   }
