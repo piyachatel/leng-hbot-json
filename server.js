@@ -37,7 +37,7 @@ app.get('/inquiry/emp', (req, res) => {
   console.log("get message => %s \n" , message); 
   
   fname = `${req.query["key1"]}` ; 
-
+  fname = 'วรเชษฐ์'
   var oracledb = require("oracledb");
   oracledb.getConnection({
       user : "stag",
@@ -48,16 +48,23 @@ app.get('/inquiry/emp', (req, res) => {
    if (err) { 
       console.error(err); return; }
 
-      sql = "SELECT first_name ,last_name , email , tel from IF_AP002_MAINTAIN_EMPLOYEE where first_name like '%"+ fname +"%' and inf_status = 'S' order by first_name " ; 
-      console.error(sql); 
+      sql = "SELECT first_name ||' ' || last_name || ' ' || email ||' ' || tel from IF_AP002_MAINTAIN_EMPLOYEE where first_name like '%"+ fname +"%' and inf_status = 'S' order by first_name " ; 
+      console.log(sql); 
       connection.execute(sql,
    function(err, result){
    if (err) { 
       console.error(err); return; 
    }
-      console.log(result.rows);
+//      console.log(result.rows);
 
-      res.send(result.rows);
+message = '' ; 
+
+   for(var ind in result.rows) { 
+    console.log( ind ); 
+    console.log( result.rows[ind][0] ); 
+    message += result.rows[ind][0] + "\n" ;
+   }
+      res.send( message );
    });
    });
   

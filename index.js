@@ -50,7 +50,7 @@ app.get('/inquiry/emp', (req, res) => {
   // get walking directions from central park to the empire state building
   var http = require("https");
   //    url = "https://chat.pt.co.th/py/postjson";
-  url = "https://chat.pt.co.th/inquiry/emp";
+  url = "https://chat.pt.co.th/inquiry/emp?key1=test";
 
   //    url = "http://172.17.200.3/py/test_ora.py" ;
 
