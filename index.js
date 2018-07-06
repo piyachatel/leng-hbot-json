@@ -7,18 +7,6 @@ const app = express();
 var router = express.Router();
 var request1 = require('request');
 
-var options = {
-  host: 'http://172.16.200.3',
-  port: '80',
-  path: '/py/test.py',
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8'
-  }
-};
-
-
-
 const PORT = process.env.PORT || 5000
 
 app.use(bodyParser.urlencoded({
@@ -61,8 +49,8 @@ app.get('/inquiry/emp', (req, res) => {
 
   // get walking directions from central park to the empire state building
   var http = require("https");
-  //    url = "https://chat.pt.co.th/py/test_ora.py";
-  url = "https://leng-chat2.herokuapp.com/";
+  //    url = "https://chat.pt.co.th/py/postjson";
+  url = "https://chat.pt.co.th/";
 
   //    url = "http://172.17.200.3/py/test_ora.py" ;
 
@@ -110,43 +98,7 @@ app.get('/inquiry/emp', (req, res) => {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
-  function ExternalAPI2(url) {
 
-    const querystring = require('querystring');
-    const https = require('https');
-
-    var postData = querystring.stringify({
-      'msg': 'Hello World!'
-    });
-
-    var options = {
-      hostname: 'leng-chat2.herokuapp.com',
-      port: 443,
-      path: '/sendapi',
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': postData.length
-      }
-    };
-
-    var req = https.request(options, (res) => {
-      console.log("Start External API2 =================>\n");
-      console.log('statusCode:', res.statusCode);
-      console.log('headers:', res.headers);
-
-      res.on('data', (d) => {
-        process.stdout.write(d);
-      });
-    });
-
-    req.on('error', (e) => {
-      console.error(e);
-    });
-
-    req.write(postData);
-    req.end();
-  }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   function nodeText(text) {
     const data = {
