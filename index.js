@@ -92,6 +92,61 @@ app.get('/inquiry/emp', (req, res) => {
     } )
   } ) ;
 
+  app.post('/inquiry/emp', (req, res) => {
+    
+    message = '' ;
+    for (let key in req.body) {
+      message += `${key}: ${req.body[key]}`
+    }
+
+    console.log("/inquiry/emp => Inquiry");
+    console.log("post message => %s", message);
+        
+  
+    // get walking directions from central park to the empire state building
+    var http = require("https");
+    //    url = "https://chat.pt.co.th/py/postjson";
+    url = "https://chat.pt.co.th/inquiry/emp";
+  
+    //    url = "http://172.17.200.3/py/test_ora.py" ;
+  
+    console.log("URL ------------->%s\n", url);
+  
+    var buffer = '',
+      data,
+      route;
+  
+    var request = http.get(url, function (response) {
+  
+      response.on("data", function (chunk) {
+        buffer += chunk;
+      });
+  
+  
+      response.on("end", function (err) {
+        // finished transferring data
+        // dump the raw data
+        //console.log("Start External API ------------->\n") ; 
+        console.log("2.1 Result from API : ,%s" , buffer);
+  
+        let nodes = {
+          "nodes": []
+        };
+    
+    
+        nodes["nodes"].push(nodeText(buffer));
+    
+        res.send(nodes);
+        //console.log("End--------------->\n");
+      });
+  
+  
+  
+  
+  
+      console.log('Finish!!!!!!!!');
+      } )
+    } ) ;  
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
   
