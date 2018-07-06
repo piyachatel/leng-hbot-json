@@ -72,18 +72,20 @@ app.get('/inquiry/emp', (req, res) => {
       // dump the raw data
       //console.log("Start External API ------------->\n") ; 
       console.log("2.1 Result from API : ,%s" , buffer);
+
+      let nodes = {
+        "nodes": []
+      };
+  
+  
+      nodes["nodes"].push(nodeText(buffer));
+  
+      res.send(nodes);
       //console.log("End--------------->\n");
     });
 
 
-    let nodes = {
-      "nodes": []
-    };
 
-
-    nodes["nodes"].push(nodeText(buffer));
-
-    res.send(nodes);
 
 
     console.log('Finish!!!!!!!!');
