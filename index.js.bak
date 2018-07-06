@@ -70,11 +70,13 @@ https://leng-chat2.herokuapp.com/sendapi
   }
 */
 
-  message = ExternalAPI("http://172.17.200.3/py/test_ora.py")  ; 
+
+
+  message = ExternalAPI3("http://172.17.200.3/py/test_ora.py")  ; 
   console.log("\n++++++ %s \n" , message ) ;
 
  // ExternalAPI2("http://172.17.200.3/py/test_ora.py") ;
-  
+/*  
   let nodes = {
     "nodes": []
   };
@@ -86,29 +88,29 @@ https://leng-chat2.herokuapp.com/sendapi
 
 
 console.log('Finish!!!!!!!!') ;
+*/
+
 }) ;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 function ExternalAPI(url) {
 
+
 // get walking directions from central park to the empire state building
 var http = require("https");
 //    url = "https://chat.pt.co.th/py/test_ora.py";
     url = "https://leng-chat2.herokuapp.com/";
+	
 //    url = "http://172.17.200.3/py/test_ora.py" ;
 
 console.log("URL ------------->%s\n",url) ;
 
-   var buffer = '55555555555555', 
+   var buffer = 'This is test message.', 
         data,
         route;
 
-// get is a simple wrapper for request()
-// which sets the http method to GET
 var request = http.get(url, function (response) {
-    // data is streamed in chunks from the server
-    // so we have to handle the "data" event    
  
     response.on("data", function (chunk) {
         buffer += chunk;
@@ -119,14 +121,27 @@ var request = http.get(url, function (response) {
         // finished transferring data
         // dump the raw data
 		//console.log("Start External API ------------->\n") ; 
-        //console.log(buffer);
+//        console.log("2.1 Result from API : ,%s" , buffer);
         //console.log("End--------------->\n");
     });
 	
 	
+	  let nodes = {
+    "nodes": []
+  };
+  
+
+  nodes["nodes"].push(nodeText(message));
+
+  res.send(nodes);
+
+
+  console.log('Finish!!!!!!!!') ;
 }); 
-  return buffer;
+
 }
+
+///////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
