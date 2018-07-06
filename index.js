@@ -56,7 +56,7 @@ app.get('/inquiry/emp', (req, res) => {
 
   console.log("URL ------------->%s\n", url);
 
-  var buffer = 'This is test message test.',
+  var buffer = '',
     data,
     route;
 
