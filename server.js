@@ -28,63 +28,65 @@ app.post('/api/json', (req, res) => {
 });
 
 app.get('/inquiry/emp', (req, res) => {
-  message = '{"nodes":[{"node_type":"node","nodeResponse":{"type":"text","response":"Test inquiry data "}}]}';
+  
+  message = ''
   for (let key in req.query) {
-    message += `${key}: ${req.query[key]}`
+    message += `${key}= ${req.query[key]}`
   }
+  console.log("/inquiry/emp => Inquiry \n "); 
+  console.log("get message => %s \n" , message); 
+  
+  fname = `${req.query["key1"]}` ; 
 
+  var oracledb = require("oracledb");
+  oracledb.getConnection({
+      user : "stag",
+      password : "stag4prd",
+      connectString : "orastg"
+   },
+   function(err, connection){
+   if (err) { 
+      console.error(err); return; }
 
-  res.send(message);
-})
+      sql = "SELECT first_name ,last_name , email , tel from IF_AP002_MAINTAIN_EMPLOYEE where first_name like '%"+ fname +"%' and inf_status = 'S' order by first_name " ; 
+      console.error(sql); 
+      connection.execute(sql,
+   function(err, result){
+   if (err) { 
+      console.error(err); return; 
+   }
+      console.log(result.rows);
 
+      res.send(result.rows);
+   });
+   });
+  
+
+  //res.send(message);
+}) ;
+
+app.get('/testora', (req, res) => {
+var oracledb = require("oracledb");
+oracledb.getConnection({
+    user : "stag",
+    password : "stag4prd",
+    connectString : "orastg"
+ },
+ function(err, connection){
+ if (err) { 
+    console.error(err); return; }
+    connection.execute("SELECT * from tab where tname like '%PR%' ",
+ function(err, result){
+ if (err) { 
+    console.error(err); return; 
+ }
+    console.log(result.rows);
+    res.send(result.rows);
+ });
+ });
+}) ;
 /////////////////////////////////////////////////////////////////////////////////////////
-app.get('/inquiry/emp', (req, res) => {
 
-  console.log("/inquiry/emp => Inquiry");
-  message = "Your data : Get method 1 2 3 4";
-
-  // get walking directions from central park to the empire state building
-  var http = require("https");
-  //    url = "https://chat.pt.co.th/py/postjson";
-  url = "https://chat.pt.co.th/py/postjson";
-
-  //    url = "http://172.17.200.3/py/test_ora.py" ;
-
-  console.log("URL ------------->%s\n", url);
-
-  var buffer = 'This is test message test.',
-    data,
-    route;
-
-  var request = http.get(url, function (response) {
-
-    response.on("data", function (chunk) {
-      buffer += chunk;
-    });
-
-
-    response.on("end", function (err) {
-      // finished transferring data
-      // dump the raw data
-      //console.log("Start External API ------------->\n") ; 
-      console.log("2.1 Result from API : ,%s" , buffer);
-      //console.log("End--------------->\n");
-    });
-
-
-    let nodes = {
-      "nodes": []
-    };
-
-
-    nodes["nodes"].push(nodeText(buffer));
-
-    res.send(nodes);
-
-
-    console.log('Finish!!!!!!!!');
-    } )
-  } ) ;
 
   ///////////////////////////////////////////////////////////////////////////////////////////////
 
