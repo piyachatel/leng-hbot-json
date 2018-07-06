@@ -123,7 +123,7 @@ app.post('/inquiry/emp', (req, res) => {
     response.on("data", function (chunk) {
       buffer += chunk;
     });
-
+ 
 
     response.on("end", function (err) {
       // finished transferring data
