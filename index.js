@@ -45,27 +45,45 @@ app.get('/api/json', (req, res) => {
 app.get('/inquiry/emp', (req, res) => {
 
   console.log("/inquiry/emp => Inquiry");
-  message = "Your data : Get method 1 2 3 4";
+  message = "X";
 
+  for (let key in req.query) {
+    message += `${key}: ${req.query[key]}`
+  }
+  
   // get walking directions from central park to the empire state building
   var http = require("https");
   //    url = "https://chat.pt.co.th/py/postjson";
-  
+
   //    url = "http://172.17.200.3/py/test_ora.py" ;
 
   console.log("URL ------------->%s\n", url);
 
-  var url = "https://chat.pt.co.th/inquiry/emp?key1=" ; 
+  var url = "https://chat.pt.co.th/inquiry/emp?key1=";
 
   var buffer = '',
     data,
     route;
 
-    fname =  `${req.query["key1"]}` ;
-    buff_utf8 = Buffer.from(fname , 'utf-8') ; 
-    hexname = buff_utf8.toString('hex')
-    console.log('====>%s', hexname);
-    url = url + hexname;
+  fname = `${req.query["key1"]}`;
+  buff_utf8 = Buffer.from(fname, 'utf-8');
+  hexname = buff_utf8.toString('hex')
+  console.log('====>%s', hexname);
+  url = url + hexname;
+
+  if (message=='X') { 
+
+    console.log('====> No message \n');
+
+    let nodes = {
+      "nodes": []
+    };
+
+
+    nodes["nodes"].push(nodeText('No Input'));
+    res.send(nodes); 
+    return ;
+  }
 
   var request = http.get(url, function (response) {
 
@@ -101,50 +119,60 @@ app.get('/inquiry/emp', (req, res) => {
 
 app.post('/inquiry/emp', (req, res) => {
 
-  message = '';
+  message = 'X';
   for (let key in req.body) {
     message += `${key}: ${req.body[key]}`
   }
 
-  fname = `${req.body["key1"]}` ;
+  fname = `${req.body["key1"]}`;
 
   console.log("/inquiry/emp => Inquiry");
   console.log("post message => %s", message);
 
+  if (message=='X') { 
+    
+    let nodes = {
+      "nodes": []
+    };
 
+
+    nodes["nodes"].push(nodeText('No Input'));
+    res.send(nodes); 
+  }
   // get walking directions from central park to the empire state building
   var http = require("https");
   //    url = "https://chat.pt.co.th/py/postjson";
 
   //    url = "http://172.17.200.3/py/test_ora.py" ;
 
-  console.log("URL ------------->%s\n", url);
+
 
   var buffer = '',
     data,
     route;
 
 
-    var url = "https://chat.pt.co.th/inquiry/emp?key1=" ; 
+  var url = "https://chat.pt.co.th/inquiry/emp?key1=";
+  console.log("URL ------------->%s\n", url);
 
-    var buffer = '',
-      data,
-      route;
-  
-      buff_utf8 = Buffer.from(fname , 'utf-8') ; 
-      hexname = buff_utf8.toString('hex')
-      console.log('====>%s', hexname);
-      url = url + hexname;
+  var buffer = '',
+    data,
+    route;
 
-      console.log("URL ------------->%s\n", url);
-      console.log("URL ------------->%s\n", hexname);
-      
+  buff_utf8 = Buffer.from(fname, 'utf-8');
+  hexname = buff_utf8.toString('hex')
+  console.log('====>%s', hexname);
+  url = url + hexname;
+
+  console.log("URL ------------->%s\n", url);
+  console.log("URL ------------->%s\n", hexname);
+
   var request = http.get(url, function (response) {
 
     response.on("data", function (chunk) {
       buffer += chunk;
     });
- 
+
 
     response.on("end", function (err) {
       // finished transferring data
