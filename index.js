@@ -50,15 +50,22 @@ app.get('/inquiry/emp', (req, res) => {
   // get walking directions from central park to the empire state building
   var http = require("https");
   //    url = "https://chat.pt.co.th/py/postjson";
-  url = "https://chat.pt.co.th/inquiry/emp?key1=เชษฐ์";
-
+  
   //    url = "http://172.17.200.3/py/test_ora.py" ;
 
   console.log("URL ------------->%s\n", url);
 
+  var url = "https://chat.pt.co.th/inquiry/emp?key1=" ; 
+
   var buffer = '',
     data,
     route;
+
+    fname =  `${req.query["key1"]}` ;
+    buff_utf8 = Buffer.from(fname , 'utf-8') ; 
+    hexname = buff_utf8.toString('hex')
+    console.log('====>%s', hexname);
+    url = url + hexname;
 
   var request = http.get(url, function (response) {
 
