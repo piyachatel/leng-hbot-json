@@ -115,7 +115,6 @@ app.post('/inquiry/emp', (req, res) => {
   // get walking directions from central park to the empire state building
   var http = require("https");
   //    url = "https://chat.pt.co.th/py/postjson";
-  url = "https://chat.pt.co.th/inquiry/emp" ;
 
   //    url = "http://172.17.200.3/py/test_ora.py" ;
 
@@ -125,6 +124,21 @@ app.post('/inquiry/emp', (req, res) => {
     data,
     route;
 
+
+    var url = "https://chat.pt.co.th/inquiry/emp?key1=" ; 
+
+    var buffer = '',
+      data,
+      route;
+  
+      buff_utf8 = Buffer.from(fname , 'utf-8') ; 
+      hexname = buff_utf8.toString('hex')
+      console.log('====>%s', hexname);
+      url = url + hexname;
+
+      console.log("URL ------------->%s\n", url);
+      console.log("URL ------------->%s\n", hexname);
+      
   var request = http.get(url, function (response) {
 
     response.on("data", function (chunk) {
