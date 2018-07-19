@@ -128,7 +128,7 @@ app.post('/inquiry/emp', (req, res) => {
   user1 = `${req.body["user1"]}`;
   first1 = `${req.body["first1"]}`;
 
-  console.log("/inquiry/emp => Inquiry");
+  console.log("/inquiry/emp => Inquiry 123");
   console.log("post message => %s", message);
 
   if (message=='X') { 
