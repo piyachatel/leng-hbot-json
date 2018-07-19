@@ -168,16 +168,16 @@ app.post('/inquiry/emp', (req, res) => {
 
   buff_utf8 = Buffer.from(user1, 'utf-8');
   hexname = buff_utf8.toString('hex')
-  console.log('====>%s', hexname);
+  console.log('user1====>%s', hexname);
   url = url + '&user1='+hexname;
 
   buff_utf8 = Buffer.from(first1, 'utf-8');
   hexname = buff_utf8.toString('hex')
-  console.log('====>%s', hexname);
+  console.log('first1====>%s', hexname);
   url = url + '&first1='+hexname;
 
-  console.log("URL ------------->%s\n", url);
-  console.log("URL ------------->%s\n", hexname);
+  console.log("Final URL --->%s\n", url);
+  
 
   var request = http.get(url, function (response) {
 
