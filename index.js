@@ -125,6 +125,8 @@ app.post('/inquiry/emp', (req, res) => {
   }
 
   fname = `${req.body["key1"]}`;
+  user1 = `${req.body["user1"]}`;
+  first1 = `${req.body["first1"]}`;
 
   console.log("/inquiry/emp => Inquiry");
   console.log("post message => %s", message);
@@ -163,6 +165,16 @@ app.post('/inquiry/emp', (req, res) => {
   hexname = buff_utf8.toString('hex')
   console.log('====>%s', hexname);
   url = url + hexname;
+
+  buff_utf8 = Buffer.from(user1, 'utf-8');
+  hexname = buff_utf8.toString('hex')
+  console.log('====>%s', hexname);
+  url = url + '&user1='+hexname;
+
+  buff_utf8 = Buffer.from(first1, 'utf-8');
+  hexname = buff_utf8.toString('hex')
+  console.log('====>%s', hexname);
+  url = url + '&first1='+hexname;
 
   console.log("URL ------------->%s\n", url);
   console.log("URL ------------->%s\n", hexname);
