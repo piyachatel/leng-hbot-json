@@ -105,6 +105,10 @@ app.get('/inquiry/emp', (req, res) => {
 
       nodes["nodes"].push(nodeText(buffer));
 
+	  console.log( "OUTPUT =================================" ) ;
+      console.log( JSON.stringify(nodes) );
+	  console.log( "OUTPUT =================================" ) ;
+
       res.send(nodes);
       //console.log("End--------------->\n");
     });
@@ -190,7 +194,7 @@ app.post('/inquiry/emp', (req, res) => {
       // finished transferring data
       // dump the raw data
       //console.log("Start External API ------------->\n") ; 
-      console.log("2.1 Result from API : ,%s", buffer);
+      console.log("2.10 Result from API : ,%s", buffer);
 
       let nodes = {
         "nodes": []
