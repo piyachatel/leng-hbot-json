@@ -198,6 +198,10 @@ app.post('/inquiry/emp', (req, res) => {
 
 
       nodes["nodes"].push(nodeText(buffer));
+      
+	  console.log( "OUTPUT =================================" ) ;
+      console.log( JSON.stringify(nodes) );
+	  console.log( "OUTPUT =================================" ) ;
 
       res.send(nodes);
       //console.log("End--------------->\n");
